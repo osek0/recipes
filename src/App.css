@@ -1,38 +1,373 @@
-.App {
-  text-align: center;
+/* We will need to add this to url because of the CORS issue */
+
+/* https://cors-anywhere.herokuapp.com/ */
+
+/* Global Styles */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Nunito", sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Loader */
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 10px;
+  background: #3498db;
+  border-radius: 5px;
+  animation: spinner 1.8s ease-in-out infinite;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.loader::before,
+.loader::after {
+  position: absolute;
+  display: block;
+  content: "";
+  animation: spinner 1.8s ease-in-out infinite;
+  height: 10px;
+  border-radius: 5px;
+}
+
+.loader::before {
+  top: -20px;
+  left: 10px;
+  width: 40px;
+  background: #ef4836;
+}
+
+.loader::after {
+  bottom: -20px;
+  width: 35px;
+  background: #f5ab35;
+}
+
+@keyframes spinner {
+  0% {
+    transform: translateX(40px);
+  }
+  50% {
+    transform: translateX(-30px);
+  }
+  100% {
+    transform: translateX(40px);
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Button */
+
+button {
+  border: none;
+  outline: none;
+  width: 90px;
+  padding: 10px 0;
+  color: #fff;
+  background: #353b80;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+/* Container */
+
+.container {
+  width: 100%;
+  max-width: 1060px;
+  margin: 0 auto;
+}
+
+/* Nav Styles */
+
+nav {
+  width: 100%;
+  padding: 16px 0;
+  background: #353b80;
+}
+
+nav h2 {
+  color: #fff;
+}
+
+/* Logo Styles */
+
+.logo {
+  text-decoration: none;
+  font-size: 24px;
+  line-height: 1;
+  color: #fff;
+}
+
+.logo span {
+  color: lightgreen;
+  font-weight: 800;
+  margin-left: 2px;
+}
+
+/* Hero Styles */
+
+.hero {
+  width: 100%;
+  min-height: calc(100vh - 58px);
+  padding-bottom: 28px;
+  position: relative;
+}
+
+.hero .container:nth-of-type(2) {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* Search Styles */
+
+form {
+  width: 100%;
+  margin: 28px 0 0 0;
+  display: flex;
   align-items: center;
+}
+
+form .formContainer {
+  height: 38px;
+  position: relative;
+}
+
+form .formContainer input,
+form .formContainer button {
+  height: 100%;
+  border: none;
+  outline: none;
+}
+
+form .formContainer input {
+  border: 1px solid #eee;
+  padding: 0 10px;
+  width: 260px;
+  display: block;
+}
+
+form .formContainer input:valid,
+form .formContainer input:focus {
+  border: 1px solid #353b80;
+}
+
+form .formContainer input:valid + label,
+form .formContainer input:focus + label {
+  color: #353b80;
+  font-size: 16px;
+  font-weight: 600;
+  transform: translateY(-24px);
+}
+
+form .formContainer label {
+  position: absolute;
+  top: 0;
+  font-size: 16px;
+  font-weight: 300;
+  pointer-events: none;
+  transform: translateY(9px) translateX(10px);
+  transition: all 400ms ease-in-out;
+}
+
+/* Recipe Styles */
+
+.recipe {
+  width: 100%;
+  max-width: 330px;
+  margin: 28px 0 0 0;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.recipe a {
+  text-decoration: none;
+}
+
+.recipe a .recipeBg {
+  width: 100%;
+  height: 280px;
+}
+
+.recipe .recipeInfo {
+  background: #202342;
+  padding: 24px 34px;
+}
+
+.recipe .recipeInfo p {
+  color: #fafafa;
+}
+
+.recipe .recipeInfo p:last-of-type {
+  margin: 6px 0;
+}
+
+.recipe .recipeInfo a {
+  display: inline-block;
+  margin: 4px 0 0 0;
+  padding: 8px;
+  border: none;
+  outline: none;
+  color: #fff;
+  background: #353b80;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+/* Pagination Styles */
+
+.pagination {
+  width: 100%;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin: 28px 0 0 0;
 }
 
-.App-link {
-  color: #61dafb;
+.pagination button {
+  margin: 0 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Error Message Styles */
+
+.errorMsg {
+  font-size: 26px;
+  line-height: 1;
+  color: red;
+  margin: 18px 0 0 0;
+}
+
+/* Full Recipe Styles */
+
+.fullRecipe {
+  width: 100%;
+  min-height: calc(100vh - 58px);
+  background: #fff;
+  display: flex;
+}
+
+.fullRecipe .container {
+  margin: auto;
+}
+
+.fullRecipe .container .fullRecipeCard {
+  width: 100%;
+  display: flex;
+}
+
+.fullRecipe .container .fullRecipeCard .fullRecipeBg {
+  width: 100%;
+  max-width: 50%;
+  min-height: 600px;
+  height: 600px;
+}
+
+.fullRecipe .container .fullRecipeCard .fullRecipeInfo {
+  width: 100%;
+  max-width: 50%;
+  height: 600px;
+  max-height: 600px;
+  padding: 20px 38px;
+  background: #353b80;
+  color: #fff;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.fullRecipe .container .fullRecipeCard .fullRecipeInfo::-webkit-scrollbar {
+  width: 1em;
+}
+
+.fullRecipe
+  .container
+  .fullRecipeCard
+  .fullRecipeInfo::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px #142b44;
+  border-radius: 50px;
+}
+
+.fullRecipe
+  .container
+  .fullRecipeCard
+  .fullRecipeInfo::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.5);
+  outline: 1px solid slategrey;
+  border-radius: 50px;
+}
+
+.fullRecipe .container .fullRecipeCard .fullRecipeInfo ul {
+  margin: 12px 0 0 0;
+}
+
+.fullRecipe .container .fullRecipeCard .fullRecipeInfo ul li {
+  margin: 4px 0 0 0;
+  word-wrap: break-word;
+}
+
+/* Media Queries */
+
+@media (max-width: 754px) {
+  .hero .container:nth-of-type(2) {
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
   }
-  to {
-    transform: rotate(360deg);
+  form {
+    max-width: 520px;
+    margin: 28px auto 0 auto;
+  }
+  form .formContainer {
+    width: 80%;
+  }
+  form .formContainer input {
+    width: 100%;
+  }
+  form .formContainer button {
+    width: 20%;
+  }
+  .recipe {
+    max-width: 520px;
+  }
+  .errorMsg {
+    font-size: 19px;
+  }
+}
+
+@media (min-width: 755px) and (max-width: 1110px) {
+  .recipe {
+    max-width: 48%;
+  }
+}
+
+@media (max-width: 855px) {
+  .fullRecipe .container .fullRecipeCard {
+    flex-direction: column;
+    align-items: center;
+  }
+  .fullRecipe .container .fullRecipeCard .fullRecipeBg {
+    max-width: 100%;
+    min-height: 280px;
+    height: 280px;
+  }
+  .fullRecipe .container .fullRecipeCard .fullRecipeInfo {
+    max-width: 100%;
+    height: auto;
+    max-height: 420px;
+  }
+  .fullRecipe .container .fullRecipeCard .fullRecipeInfo h2 {
+    font-size: 22px;
+  }
+  .fullRecipe .container .fullRecipeCard .fullRecipeInfo ul li {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 1110px) {
+  .container {
+    max-width: 94%;
   }
 }
